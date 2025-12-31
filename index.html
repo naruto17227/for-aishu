@@ -8,73 +8,131 @@
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(120deg, #fde2e4, #fadadd);
+  background: linear-gradient(#cbe7ff, #fde2e4);
   height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  overflow: hidden;
 }
+
 .slide {
   display: none;
+  height: 100vh;
+  width: 100vw;
   text-align: center;
   padding: 40px;
-  max-width: 90%;
-  animation: fade 0.8s ease;
+  box-sizing: border-box;
 }
+
 .slide.active {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
+
 h1, p {
-  color: #3a3a3a;
+  color: #333;
 }
-h1 {
-  font-size: 1.8rem;
-}
+
 p {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   line-height: 1.6;
 }
-.tap {
-  margin-top: 25px;
-  font-size: 0.9rem;
-  opacity: 0.7;
+
+/* Countdown */
+.count {
+  font-size: 4rem;
+  animation: pop 1s infinite;
 }
-@keyframes fade {
-  from {opacity: 0; transform: translateY(10px);}
-  to {opacity: 1; transform: translateY(0);}
+
+/* Clouds */
+.clouds {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 50%;
+  display: flex;
+  justify-content: space-between;
+  font-size: 4rem;
+  animation: openClouds 2s forwards;
+}
+
+@keyframes openClouds {
+  from {opacity: 1;}
+  to {opacity: 0;}
+}
+
+/* Rabbit */
+.rabbit {
+  font-size: 4rem;
+  animation: hop 1s infinite alternate;
+}
+
+@keyframes hop {
+  from {transform: translateY(0);}
+  to {transform: translateY(-20px);}
+}
+
+/* Stars */
+.star {
+  position: absolute;
+  top: -10px;
+  animation: fall 4s linear infinite;
+}
+
+@keyframes fall {
+  to {transform: translateY(110vh);}
+}
+
+/* Hearts */
+.heart {
+  position: absolute;
+  bottom: 0;
+  animation: float 4s ease-in infinite;
+}
+
+@keyframes float {
+  to {
+    transform: translateY(-110vh);
+    opacity: 0;
+  }
+}
+
+.tap {
+  margin-top: 20px;
+  opacity: 0.7;
+  font-size: 0.9rem;
 }
 </style>
 </head>
+
 <body onclick="nextSlide()">
 
+<!-- Slide 1: Countdown -->
 <div class="slide active">
-  <h1>✉️</h1>
-  <p>Hey Aishu…<br>I made something for you</p>
-  <div class="tap">(tap anywhere)</div>
+  <p>Something special is coming…</p>
+  <div class="count" id="count">3</div>
 </div>
 
+<!-- Slide 2: Clouds -->
 <div class="slide">
-  <p>So apparently…<br><strong>it’s been 3 YEARS</strong> with you 🙈<br><br>
-  and that still feels unreal</p>
+  <div class="clouds">☁️☁️</div>
+  <p>Hey Aishu…<br>I made something just for you 🤍</p>
 </div>
 
+<!-- Slide 3: Rabbit -->
+<div class="slide">
+  <div class="rabbit">🐇💌</div>
+  <p>This little bunny brought you a letter…</p>
+</div>
+
+<!-- Slide 4: Stars -->
 <div class="slide">
   <p>You’re still my favorite person<br>
-  to talk to,<br>
-  annoy,<br>
-  laugh with,<br>
-  and feel safe around 🤍</p>
+  to talk to, laugh with,<br>
+  and feel safe around ✨</p>
 </div>
 
-<div class="slide">
-  <p>Thank you for staying.<br><br>
-  Through my moods,<br>
-  my silence,<br>
-  my chaos…<br>
-  and my love.<br><br>
-  You matter to me.<br><strong>A lot.</strong></p>
-</div>
-
+<!-- Slide 5: Final -->
 <div class="slide">
   <p>3 years down…<br><br>
   and if it’s you,<br>
@@ -85,6 +143,16 @@ p {
 <script>
 let current = 0;
 const slides = document.querySelectorAll('.slide');
+
+// countdown logic
+let c = 3;
+setInterval(() => {
+  if (c > 1) {
+    c--;
+    document.getElementById("count").innerText = c;
+  }
+}, 1000);
+
 function nextSlide() {
   if (current < slides.length - 1) {
     slides[current].classList.remove('active');
@@ -92,7 +160,28 @@ function nextSlide() {
     slides[current].classList.add('active');
   }
 }
+
+// stars
+for (let i = 0; i < 20; i++) {
+  let s = document.createElement("div");
+  s.className = "star";
+  s.innerText = "✨";
+  s.style.left = Math.random() * 100 + "vw";
+  s.style.animationDuration = (2 + Math.random() * 3) + "s";
+  document.body.appendChild(s);
+}
+
+// hearts
+for (let i = 0; i < 15; i++) {
+  let h = document.createElement("div");
+  h.className = "heart";
+  h.innerText = "💗";
+  h.style.left = Math.random() * 100 + "vw";
+  h.style.animationDuration = (3 + Math.random() * 3) + "s";
+  document.body.appendChild(h);
+}
 </script>
 
 </body>
 </html>
+
