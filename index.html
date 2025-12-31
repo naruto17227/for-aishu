@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For Aishu 💖</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(120deg, #fde2e4, #fadadd);
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.slide {
+  display: none;
+  text-align: center;
+  padding: 40px;
+  max-width: 90%;
+  animation: fade 0.8s ease;
+}
+.slide.active {
+  display: block;
+}
+h1, p {
+  color: #3a3a3a;
+}
+h1 {
+  font-size: 1.8rem;
+}
+p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+.tap {
+  margin-top: 25px;
+  font-size: 0.9rem;
+  opacity: 0.7;
+}
+@keyframes fade {
+  from {opacity: 0; transform: translateY(10px);}
+  to {opacity: 1; transform: translateY(0);}
+}
+</style>
+</head>
+<body onclick="nextSlide()">
+
+<div class="slide active">
+  <h1>✉️</h1>
+  <p>Hey Aishu…<br>I made something for you</p>
+  <div class="tap">(tap anywhere)</div>
+</div>
+
+<div class="slide">
+  <p>So apparently…<br><strong>it’s been 3 YEARS</strong> with you 🙈<br><br>
+  and that still feels unreal</p>
+</div>
+
+<div class="slide">
+  <p>You’re still my favorite person<br>
+  to talk to,<br>
+  annoy,<br>
+  laugh with,<br>
+  and feel safe around 🤍</p>
+</div>
+
+<div class="slide">
+  <p>Thank you for staying.<br><br>
+  Through my moods,<br>
+  my silence,<br>
+  my chaos…<br>
+  and my love.<br><br>
+  You matter to me.<br><strong>A lot.</strong></p>
+</div>
+
+<div class="slide">
+  <p>3 years down…<br><br>
+  and if it’s you,<br>
+  I’d choose every year again 💞<br><br>
+  Happy 3 years to <strong>us</strong> 🫶</p>
+</div>
+
+<script>
+let current = 0;
+const slides = document.querySelectorAll('.slide');
+function nextSlide() {
+  if (current < slides.length - 1) {
+    slides[current].classList.remove('active');
+    current++;
+    slides[current].classList.add('active');
+  }
+}
+</script>
+
+</body>
+</html>
